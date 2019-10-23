@@ -1,12 +1,22 @@
-import { TestBed } from '@angular/core/testing';
-
-import { JokeService } from './joke.service';
+import {of} from 'rxjs';
+import {JokeService} from './joke.service';
 
 describe('JokeService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  let jokeService: JokeService;
+  const expectedJoke = 'expectedJoke';
+  let httpClientMock: any;
 
-  it('should be created', () => {
-    const service: JokeService = TestBed.get(JokeService);
-    expect(service).toBeTruthy();
+  beforeEach(() => {
+    httpClientMock = jasmine.createSpyObj(['get']);
+    httpClientMock.get.and.returnValue(of({value: {joke: expectedJoke}}));
+    jokeService = new JokeService(httpClientMock);
   });
+
+  it('calls correct url and cuts joke from response', () => {
+    jokeService.fetchJoke().subscribe(joke => {
+      expect(joke).toBe(expectedJoke);
+      expect(httpClientMock.get).toHaveBeenCalledWith('http://api.icndb.com/jokes/random');
+    });
+  });
+
 });

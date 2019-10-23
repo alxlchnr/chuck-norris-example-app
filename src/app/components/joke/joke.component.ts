@@ -18,7 +18,8 @@ export class JokeComponent implements OnInit {
   }
 
   showJoke() {
-    this.jokeService.fetchJoke().subscribe(joke => this.joke = joke);
+    this.jokeService.fetchJoke()
+      .subscribe(joke => this.joke = joke);
   }
 
 }
