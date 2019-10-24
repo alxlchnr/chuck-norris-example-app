@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JokeComponent } from './components/joke/joke.component';
+import { QuotationMarksPipe } from './pipes/quotation-marks.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    JokeComponent
+    JokeComponent,
+    QuotationMarksPipe
   ],
   imports: [
     BrowserModule,

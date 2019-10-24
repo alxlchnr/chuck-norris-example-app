@@ -1,6 +1,8 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {MockPipe} from 'ng-mocks';
 import {of} from 'rxjs';
+import {QuotationMarksPipe} from '../../pipes/quotation-marks.pipe';
 import {JokeService} from '../../services/joke.service';
 
 import {JokeComponent} from './joke.component';
@@ -16,7 +18,10 @@ describe('JokeComponent', () => {
     jokeServiceMock.fetchJoke.and.returnValue(of(expectedJoke));
 
     TestBed.configureTestingModule({
-      declarations: [JokeComponent],
+      declarations: [
+        JokeComponent,
+        MockPipe(QuotationMarksPipe, (val) => val)
+      ],
       providers: [
         {
           provide: JokeService,
