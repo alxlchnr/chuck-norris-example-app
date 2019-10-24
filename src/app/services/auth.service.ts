@@ -5,11 +5,14 @@ import {Credentials} from '../models/credentials';
   providedIn: 'root'
 })
 export class AuthService {
+  isLoggedIn: boolean;
 
   constructor() {
   }
 
   login(credentials: Credentials) {
-    return credentials.userName === 'admin' && credentials.password === 'secret';
+    const loginResult = credentials.userName === 'admin' && credentials.password === 'secret';
+    this.isLoggedIn = loginResult;
+    return loginResult;
   }
 }
