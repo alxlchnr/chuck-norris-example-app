@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Credentials} from '../../models/credentials';
 import {AuthService} from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +10,12 @@ import {AuthService} from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  @Output()
-  loginResult = new EventEmitter();
-
   credentials: Credentials = {} as Credentials;
 
   error: string;
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,8 +25,9 @@ export class LoginComponent implements OnInit {
     const loginResult = this.authService.login(this.credentials);
     if(!loginResult){
       this.error = 'The login was not successfull'
+    }else{
+      this.router.navigate(['/joke'])
     }
-    this.loginResult.emit(loginResult);
   }
 
 }
