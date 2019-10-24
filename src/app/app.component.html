@@ -2,5 +2,9 @@
   <a class="navbar-brand" href="#">Chuck-Norris</a>
 </nav>
 <main role="main" class="container">
-  <app-joke></app-joke>
+  <app-login
+    (loginResult)="handleLogin($event)"
+    *ngIf="!loggedIn">
+  </app-login>
+  <app-joke *ngIf="loggedIn"></app-joke>
 </main>

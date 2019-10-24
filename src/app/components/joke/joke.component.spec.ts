@@ -20,7 +20,7 @@ describe('JokeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         JokeComponent,
-        MockPipe(QuotationMarksPipe, (val) => val)
+        MockPipe(QuotationMarksPipe, (val) => val+'__transformedByPipe')
       ],
       providers: [
         {
@@ -48,7 +48,7 @@ describe('JokeComponent', () => {
     expect(component.joke).toBe(expectedJoke);
     fixture.detectChanges();
     const div: HTMLElement = fixture.debugElement.query(By.css('#joke')).nativeElement;
-    expect(div.innerText).toEqual(expectedJoke);
+    expect(div.innerText).toEqual(expectedJoke+'__transformedByPipe');
 
   });
 });
