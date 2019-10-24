@@ -1,4 +1,5 @@
-<form (ngSubmit)="doLogin()">
+<form (ngSubmit)="doLogin()"
+      #loginForm="ngForm">
   <div class="row justify-content-center">
     <div class="col-12 col-md-6 col-lg-4 text-center">
       <div class="form-group">
@@ -7,7 +8,16 @@
                [(ngModel)]="credentials.userName"
                id="userName"
                name="userName"
-               class="form-control">
+               class="form-control"
+               required
+               #userNameField="ngModel">
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center" *ngIf="userNameField.invalid && userNameField.dirty">
+    <div class="col-12 col-md-6 col-lg-4 text-center">
+      <div class="alert alert-danger">
+        Benutzername muss gefüllt sein!
       </div>
     </div>
   </div>
@@ -19,7 +29,16 @@
                [(ngModel)]="credentials.password"
                id="password"
                name="password"
-               class="form-control">
+               class="form-control"
+               required
+               #passwordField="ngModel">
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center" *ngIf="passwordField.invalid && passwordField.dirty">
+    <div class="col-12 col-md-6 col-lg-4 text-center">
+      <div class="alert alert-danger">
+        Passwort muss gefüllt sein!
       </div>
     </div>
   </div>
@@ -32,7 +51,9 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-12 col-md-6 col-lg-4 text-center">
-      <button class="btn btn-primary">Login</button>
+      <button class="btn btn-primary"
+              [disabled]="loginForm.form.invalid">Login
+      </button>
     </div>
   </div>
 </form>
